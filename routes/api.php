@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource("author", "App\Http\Controllers\AuthorController");
+Route::GET("author/search/{term}", "App\Http\Controllers\AuthorController@search");
