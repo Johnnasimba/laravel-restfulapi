@@ -12,7 +12,12 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::all();
+
+        return response()->json([
+            'total' => $authors->count(),
+            'data' => $authors
+        ], 200);
     }
 
     /**
