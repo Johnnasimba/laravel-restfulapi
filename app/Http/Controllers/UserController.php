@@ -8,7 +8,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    function index(Request $request)
+    function login(Request $request)
     {
         $user = User::where('email', $request->email)->first();
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -24,6 +24,19 @@ class UserController extends Controller
         return response()->json([
             'message' => 'User logged in successfully',
             'token' => $token
+        ], 200);
+    }
+
+    function register(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email= $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'User registered successfully',
         ], 200);
     }
 }
