@@ -18,5 +18,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource("author", "App\Http\Controllers\AuthorController");
-Route::GET("author/search/{term}", "App\Http\Controllers\AuthorController@search");
+Route::group(["middleware" => "auth:sanctum"], function () {
+    Route::apiResource("author", "App\Http\Controllers\AuthorController");
+    Route::GET("author/search/{term}", "App\Http\Controllers\AuthorController@search");
+});
+
+Route::post('login', 'App\Http\Controllers\UserController@index');
