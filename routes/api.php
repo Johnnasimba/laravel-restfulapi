@@ -24,5 +24,7 @@ Route::post('register', 'App\Http\Controllers\UserController@register');
 Route::group(["middleware" => "auth:sanctum"], function () {
     Route::apiResource("author", "App\Http\Controllers\AuthorController");
     Route::GET("author/search/{term}", "App\Http\Controllers\AuthorController@search");
+    Route::apiResource("book", "App\Http\Controllers\BookController");
+    Route::GET("book/search/{term}", "App\Http\Controllers\BookController@search");
 });
 
